@@ -9,7 +9,7 @@ class Controller_Front extends Controller_Base
 	{
 		parent::__construct($request);
 		$this->_router = new Request_Router();
-		$this->_router->map('GET', '*', 'Controller_Front#index');
+		$this->_router->map('GET', '*', 'home#index');
 	}
 
 	public function dispatch()
@@ -19,7 +19,8 @@ class Controller_Front extends Controller_Base
 			list($controller, $action) = explode('#', $params['target']);
 			$this->request()->addParam('controller', $controller);
 			$this->request()->addParam('action', $action);
-			$controller = "Cola\\$controller";
+			$controller = 'Controller_' . Utils_TextHelper::strToClass($controller);
+			$controller = '\\' . APP_NAMESPACE . '\\' . $controller;
 			$method = "{$action}Action";
 			$controller = new $controller($this->request());
 			$controller->beforeFilter($action);

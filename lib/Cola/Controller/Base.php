@@ -25,7 +25,7 @@ abstract class Controller_Base
 		return $this->_request;
 	}
 
-	public function view()
+	protected function view()
 	{
 		return $this->_view;
 	}
