@@ -13,6 +13,7 @@ class Request_Base
 	private $_password;
 	private $_fragment;
 	private $_ajax;
+	private $_params;
 
 	public function __construct()
 	{
@@ -66,6 +67,16 @@ class Request_Base
 	public function abnormalPort()
 	{
 		return $this->_port != 80;
+	}
+
+	public function params($key = null)
+	{
+		return is_null($key) ? $this->_params : $this->_params[$key];
+	}
+
+	public function addParam($key, $val)
+	{
+		$this->_params[$key] = $val;
 	}
 
 	public function fullUrl()

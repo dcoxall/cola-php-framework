@@ -5,18 +5,20 @@ abstract class View_Base
 {
 	private $_data = array();
 	private $_controller;
+	private $_loadPath;
 
-	public function __construct(Controller_Base $controller)
+	public function __construct(Controller_Base $controller, $path)
 	{
 		$this->_controller = $controller;
+		$this->_loadPath = $path;
 	}
 
-	protected function addData($key, $data)
+	public function addData($key, $data)
 	{
 		$this->_data[$key] = $data;
 	}
 
-	protected function setData($data)
+	public function setData($data)
 	{
 		if (is_array($data)) {
 			$this->_data = $data;
@@ -25,14 +27,15 @@ abstract class View_Base
 		}
 	}
 
-	protected function getData($key = null)
+	public function getData($key = null)
 	{
 		return is_null($key) ? $this->_data : $this->_data[$key];
 	}
 
 	public function render()
 	{
-
+		$data = $this->getData();
+		include(COLA_ROOT . '/views/' . $this->_loadPath . '.php');
 	}
 
 	public function controller()

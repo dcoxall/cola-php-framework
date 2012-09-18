@@ -20,13 +20,13 @@ abstract class Controller_Base
 
 	}
 
-	private function render()
-	{
-
-	}
-
-	protected function request()
+	public function request()
 	{
 		return $this->_request;
+	}
+
+	public function view()
+	{
+		return $this->_view;
 	}
 }

@@ -17,17 +17,14 @@ class Controller_Front extends Controller_Base
 		$params = $this->_router->match($this->request());
 		if (!empty($params)) {
 			list($controller, $action) = explode('#', $params['target']);
+			$this->request()->addParam('controller', $controller);
+			$this->request()->addParam('action', $action);
 			$controller = "Cola\\$controller";
 			$method = "{$action}Action";
 			$controller = new $controller($this->request());
 			$controller->beforeFilter($action);
-			$controller->$action();
+			$controller->$method();
 			$controller->afterFilter($action);
 		}
-	}
-
-	public function indexAction()
-	{
-		echo "Hello World";
 	}
 }
