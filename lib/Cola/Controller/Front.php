@@ -17,10 +17,12 @@ class Controller_Front extends Controller_Base
 		$params = $this->_router->match($this->request());
 		if (!empty($params)) {
 			list($controller, $action) = explode('#', $params['target']);
-			$action = "{$action}Action";
 			$controller = "Cola\\$controller";
+			$method = "{$action}Action";
 			$controller = new $controller($this->request());
+			$controller->beforeFilter($action);
 			$controller->$action();
+			$controller->afterFilter($action);
 		}
 	}
 

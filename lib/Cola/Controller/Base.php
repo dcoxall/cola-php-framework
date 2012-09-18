@@ -10,19 +10,16 @@ abstract class Controller_Base
 		$this->_request = $request;
 	}
 
-	public function beforeAction()
+	public function beforeFilter($action)
 	{
 		
 	}
 
-	public function afterAction()
+	public function afterFilter($action)
 	{
 
 	}
 
-	/*
-	 *	Renders to the browser
-	 */
 	private function render()
 	{
 
